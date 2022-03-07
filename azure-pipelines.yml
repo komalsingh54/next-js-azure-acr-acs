@@ -15,7 +15,9 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-- task: Docker@2
+- task: DockerInstaller@0
   inputs:
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    dockerVersion: '17.09.0-ce'
+- script: docker login freetrialreg.azurecr.io  -u freetrialreg -p bl1=vpD9jJK0HWo0uxg+6z0oMR4rN8z0
+- script: docker build -t freetrialreg.azurecr.io/freetrialreg:1
+- script: docker push freetrialreg.azurecr.io/freetrialreg:1
